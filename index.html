@@ -30,7 +30,7 @@
 
 <body>
 
-  <div id="countdown">00:00:00:00</div>
+  <div id="countdown"></div>
 
   <script>
     function actualizarContador() {
@@ -48,13 +48,8 @@
       const minutos = Math.floor((diferencia / (1000 * 60)) % 60);
       const segundos = Math.floor((diferencia / 1000) % 60);
 
-      // Formato tipo reloj (2 dígitos)
-      const d = String(dias).padStart(2, '0');
-      const h = String(horas).padStart(2, '0');
-      const m = String(minutos).padStart(2, '0');
-      const s = String(segundos).padStart(2, '0');
-
-      document.getElementById("countdown").innerHTML = `${d}:${h}:${m}:${s}`;
+  document.getElementById("countdown").innerHTML =
+    days + "d " + hours + "h " + minutes + "m " + seconds + "s";
     }
 
     // Actualiza cada segundo
