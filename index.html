@@ -1,48 +1,68 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <title>Cuenta atrás</title>
 
-<style>
-body {
-  margin: 0;
-  background: transparent;
-  font-family: 'Caveat', cursive;
-  text-align: center;
-}
+  <!-- Fuente Caveat -->
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400&display=swap" rel="stylesheet">
 
-#countdown {
-  font-size: 60px;
-  color: #333;
-}
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: transparent;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
 
-.label {
-  font-size: 20px;
-}
-</style>
+    #countdown {
+      font-family: 'Caveat', cursive;
+      font-size: 24px;
+      color: #3a6680;
+      text-align: center;
+      letter-spacing: 2px;
+    }
+  </style>
 </head>
 
 <body>
 
-<div id="countdown"></div>
+  <div id="countdown">00:00:00:00</div>
 
-<script>
-var countDownDate = new Date("Nov 14, 2026 00:00:00").getTime();
+  <script>
+    function actualizarContador() {
+      const fechaObjetivo = new Date("November 14, 2026 00:00:00").getTime();
+      const ahora = new Date().getTime();
+      const diferencia = fechaObjetivo - ahora;
 
-var x = setInterval(function() {
-  var now = new Date().getTime();
-  var distance = countDownDate - now;
+      if (diferencia <= 0) {
+        document.getElementById("countdown").innerHTML = "00:00:00:00";
+        return;
+      }
 
-  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-  var hours = Math.floor((distance / (1000 * 60 * 60)) % 24);
-  var minutes = Math.floor((distance / (1000 * 60)) % 60);
-  var seconds = Math.floor((distance / 1000) % 60);
+      const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
+      const horas = Math.floor((diferencia / (1000 * 60 * 60)) % 24);
+      const minutos = Math.floor((diferencia / (1000 * 60)) % 60);
+      const segundos = Math.floor((diferencia / 1000) % 60);
 
-  document.getElementById("countdown").innerHTML =
-    days + "d " + hours + "h " + minutes + "m " + seconds + "s";
+      // Formato tipo reloj (2 dígitos)
+      const d = String(dias).padStart(2, '0');
+      const h = String(horas).padStart(2, '0');
+      const m = String(minutos).padStart(2, '0');
+      const s = String(segundos).padStart(2, '0');
 
-}, 1000);
-</script>
+      document.getElementById("countdown").innerHTML = `${d}:${h}:${m}:${s}`;
+    }
+
+    // Actualiza cada segundo
+    setInterval(actualizarContador, 1000);
+
+    // Ejecutar inmediatamente al cargar
+    actualizarContador();
+  </script>
 
 </body>
 </html>
